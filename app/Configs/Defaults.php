@@ -35,14 +35,6 @@ class Defaults implements ConfigInterface
             return true;
         });
 
-        // Admin login styles.
-        add_action('login_enqueue_scripts', function (): void {
-            self::enqueueLoginStyles();
-        });
-        add_filter('login_headerurl', function (): string {
-            return self::customLoginLogoUrl();
-        });
-
         // Post excerpt settings.
         add_filter('excerpt_length', function (): int {
             return self::excerptLength();
@@ -82,32 +74,6 @@ class Defaults implements ConfigInterface
         }
 
         return $classes;
-    }
-
-    /**
-     * Set login styles.
-     *
-     * @return void
-     */
-    public static function enqueueLoginStyles(): void
-    {
-        wp_enqueue_style(
-            'admin-styles',
-            get_stylesheet_directory_uri() . '/login.css',
-            [],
-            false,
-            'all'
-        );
-    }
-
-    /**
-     * Set the login logo link URL.
-     *
-     * @return string
-     */
-    public static function customLoginLogoUrl(): string
-    {
-        return site_url();
     }
 
     /**

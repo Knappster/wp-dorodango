@@ -29,6 +29,7 @@ class App
         \App\Configs\PostTypes::class,
         \App\Configs\Taxonomies::class,
         \App\Configs\Dashboard::class,
+        \App\Configs\Assets::class
     ];
 
     /**

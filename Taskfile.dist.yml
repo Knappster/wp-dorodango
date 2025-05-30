@@ -1,0 +1,80 @@
+version: "3"
+
+env:
+  UID:
+    sh: id -u
+  GID:
+    sh: id -g
+
+dotenv: [".env"]
+
+vars:
+  NODE_ARGS: -it --rm -v ${PWD}:/app -w=/app --user "node"
+  NODE_IMAGE: node:22
+
+tasks:
+  default:
+    silent: true
+
+  up:
+    cmds:
+      - docker compose up -d
+
+  down:
+    cmds:
+      - docker compose down
+
+  docker-build:
+    cmds:
+      - docker compose --profile dev build
+
+  composer:
+    cmds:
+      - docker compose run -it --rm composer /bin/bash
+
+  composer-install:
+    cmds:
+      - docker compose run -it --rm composer install
+
+  composer-update:
+    cmds:
+      - docker compose run -it --rm composer update
+
+  npm:
+    cmds:
+      - docker run {{.NODE_ARGS}} {{.NODE_IMAGE}} /bin/bash
+
+  npm-install:
+    cmds:
+      - docker run {{.NODE_ARGS}} {{.NODE_IMAGE}} npm install
+
+  npm-update:
+    cmds:
+      - docker run {{.NODE_ARGS}} {{.NODE_IMAGE}} npm update
+
+  watch:
+    cmds:
+      - docker run {{.NODE_ARGS}} -p 5173:5173 {{.NODE_IMAGE}} npm run dev
+
+  build:
+    cmds:
+      - docker run {{.NODE_ARGS}} {{.NODE_IMAGE}} npm run build
+
+  wp-cli:
+    cmds:
+      - docker compose run -it --rm php /bin/sh
+
+  delete-transients:
+    cmds:
+      - docker compose run -it --rm php wp transient delete --all
+
+  phpstan:
+    cmds:
+      - docker run -v "$PWD/":/app --rm ghcr.io/phpstan/phpstan:latest-php8.4 analyse -c phpstan.neon --memory-limit 1G > phpstan/results.txt
+
+  install:
+    cmds:
+      - task: docker-build
+      - task: composer-install
+      - task: npm-install
+      - task: build

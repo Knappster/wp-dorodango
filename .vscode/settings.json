@@ -1,0 +1,5 @@
+{
+  "editor.formatOnSave": true,
+  "intelephense.telemetry.enabled": false,
+  "twig-language-2.indentStyle": "space"
+}

@@ -1,0 +1,14 @@
+parameters:
+    level: 8
+    paths:
+        - config/
+        - public/
+        - app/
+    excludePaths:
+        - public/app/mu-plugins/
+        - public/app/plugins/
+        - public/app/uploads/
+        - public/wp/
+    bootstrapFiles:
+        - phpstan/constants.php
+    ignoreErrors:

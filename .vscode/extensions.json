@@ -6,6 +6,7 @@
     "mblode.twig-language-2",
     "ms-azuretools.vscode-docker",
     "neilbrayfield.php-docblocker",
-    "xdebug.php-debug"
+    "xdebug.php-debug",
+    "biomejs.biome"
   ]
 }

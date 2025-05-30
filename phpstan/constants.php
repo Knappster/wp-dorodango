@@ -5,4 +5,5 @@
 
 define('APPROOT', dirname(__DIR__));
 define('WP_ENVIRONMENT_TYPE', 'local');
+define('VITE_DEV_SERVER_URL', '');
 define('SENTRY_DSN', '');

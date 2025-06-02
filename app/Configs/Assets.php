@@ -114,7 +114,7 @@ class Assets implements ConfigInterface
                     'core',
                     get_stylesheet_directory_uri() . '/dist/' . $style_path,
                     [],
-                    false,
+                    null,
                     'all'
                 );
             }

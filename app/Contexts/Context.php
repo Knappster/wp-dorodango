@@ -41,6 +41,9 @@ abstract class Context
      */
     public function render(): void
     {
-        Timber::render($this->templatePaths, Timber::context());
+        $context = Timber::context();
+        // Always add the context name.
+        $context['context'] = $this::class;
+        Timber::render($this->templatePaths, $context);
     }
 }

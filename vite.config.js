@@ -4,12 +4,13 @@ import biomePlugin from "vite-plugin-biome";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
+import twigCss from "./vite-plugin-twig-css";
 
 export default defineConfig({
 	css: {
 		transformer: "lightningcss",
 		lightningcss: {
-			targets: browserslistToTargets(browserslist("defaults")),
+			targets: browserslistToTargets(browserslist("last 2 versions, not dead, > 0.2%")),
 			drafts: {
 				customMedia: true,
 			},
@@ -36,5 +37,5 @@ export default defineConfig({
 		sourcemap: true,
 		cssMinify: "lightningcss",
 	},
-	plugins: [biomePlugin(), ViteImageOptimizer({}), vue()],
+	plugins: [biomePlugin(), ViteImageOptimizer({}), vue(), twigCss()],
 });
